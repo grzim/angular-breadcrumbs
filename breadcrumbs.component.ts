@@ -5,7 +5,7 @@ import { NavigationEnd, Router } from '@angular/router'
 const textForHomePage = 'home';
 
 @Component({
-    selector: 'v-breadcrumbs',
+    selector: 'breadcrumbs',
     templateUrl: './breadcrumbs.component.html',
     styleUrls: ['./breadcrumbs.component.scss']
 })
@@ -19,7 +19,7 @@ export class BreadcrumbsComponent {
             .map((url) => url
                 .replace('/', '') // remove trailing slash from url
                 .split('/')
-                .reduce((acc, curr, i) =>
+                .reduce((acc, curr) =>
                     ([...acc, {
                         name: curr,
                         path: acc.slice(-1)[0].path + '/' + curr
