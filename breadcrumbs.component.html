@@ -1,0 +1,5 @@
+<div>
+  <div *ngFor="let crumb of breadcrumbs$ | async">
+    <a [routerLink]="crumb.path">/{{crumb.name}}</a>
+  </div>
+</div>
