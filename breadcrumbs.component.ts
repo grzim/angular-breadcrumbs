@@ -9,7 +9,7 @@ import { NavigationEnd, Router } from '@angular/router'
     styleUrls: ['./breadcrumbs.component.scss']
 })
 export class BreadcrumbsComponent {
-    private breadcrumbs$: Observable<string>
+    private breadcrumbs$: Observable<{name, path}>
 
     constructor(router: Router) {
         this.breadcrumbs$ = router.events
