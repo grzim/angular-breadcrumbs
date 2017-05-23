@@ -2,6 +2,7 @@ import { Component } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { NavigationEnd, Router } from '@angular/router'
 
+const textForHomePage = 'home';
 
 @Component({
     selector: 'v-breadcrumbs',
@@ -18,14 +19,10 @@ export class BreadcrumbsComponent {
             .map((url) => url
                 .replace('/', '') // remove trailing slash from url
                 .split('/')
-                .reduce((acc, curr) =>
-                    ({
-                        all: acc.all + '/' + curr,
-                        data: [...acc.data, {
-                            name: curr,
-                            path: acc.all + '/' + curr
-                        }]
-                    }), {all: '', data: []}))
-            .pluck('data')
+                .reduce((acc, curr, i) =>
+                    ([...acc, {
+                        name: curr,
+                        path: acc.slice(-1)[0].path + '/' + curr
+                    }]), [{name: textForHomePage, path: ''}]))
     }
 }
