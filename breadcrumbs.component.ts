@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core'
-import { filterOnInstanceType, log, toWindow as tW } from '../../../utils/helpers-streams'
+import { Component } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 import { NavigationEnd, Router } from '@angular/router'
 
@@ -13,7 +12,8 @@ export class BreadcrumbsComponent {
     private breadcrumbs$: Observable<string>
 
     constructor(router: Router) {
-        this.breadcrumbs$ = router.events[filterOnInstanceType](NavigationEnd)
+        this.breadcrumbs$ = router.events
+            .filter((routerEvent) => routerEvent instanceof NavigationEnd)
             .pluck('url')
             .map((url) => url
                 .replace('/', '') // remove trailing slash from url
