@@ -15,8 +15,7 @@ export class BreadcrumbsComponent {
     constructor(router: Router) {
         this.breadcrumbs$ = router.events
             .filter((routerEvent) => routerEvent instanceof NavigationEnd)
-            .pluck('url')
-           .mapTo(router.url
+            .mapTo(router.url
                 .replace('/', '') // remove trailing slash from url
                 .split('/')
                 .reduce((acc, curr) =>
