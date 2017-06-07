@@ -16,13 +16,14 @@ export class BreadcrumbsComponent {
         this.breadcrumbs$ = router.events
             .filter((routerEvent) => routerEvent instanceof NavigationEnd)
             .pluck('url')
-            .map((url) => url
+           .mapTo(router.url
                 .replace('/', '') // remove trailing slash from url
                 .split('/')
                 .reduce((acc, curr) =>
                     ([...acc, {
-                        name: curr,
-                        path: acc.slice(-1)[0].path + '/' + curr
-                    }]), [{name: textForHomePage, path: ''}]))
+                            name: curr,
+                            path: acc.slice(-1)[0].path + '/' + curr
+                    }]), [{name: textForHomePage, path: ''}])
+                .slice(1))
     }
 }
